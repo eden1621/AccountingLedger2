@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class AccountingLedgerApp {
 
-//declare the scanner and datetime formatter as a static to be able to use it throughout the class.
+    //declare the scanner and datetime formatter as a static to be able to use it throughout the class.
     static Scanner myScanner = new Scanner(System.in);
     static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy -MM -dd HH:mm:ss");
 
@@ -26,23 +26,21 @@ public class AccountingLedgerApp {
             //ask the deposit information by invoking the addDeposit function.
             addDeposit();
             //If user choose (P)
-        }
-        else if (actualChoice.equalsIgnoreCase("P")) {
+        } else if (actualChoice.equalsIgnoreCase("P")) {
             System.out.println("not yet done");
-            }
-            //If user choose (L) show Ledger
+        }
+        //If user choose (L) show Ledger
         else if (actualChoice.equalsIgnoreCase("L")) {
             System.out.println("not yet done");
-            }
-            //If user choose (X) exit the application
-        else if (actualChoice.equalsIgnoreCase("X")) {
-                System.out.println("Goodbye!");
-                System.exit(0);  // Properly exit the program
-            }
-        else {
-                System.out.println("Invalid option. Try again.");
-            }
         }
+        //If user choose (X) exit the application
+        else if (actualChoice.equalsIgnoreCase("X")) {
+            System.out.println("Goodbye!");
+            System.exit(0);  // Properly exit the program
+        } else {
+            System.out.println("Invalid option. Try again.");
+        }
+    }
 
     //Method to display the menu options
     public static void homeScreen() {
@@ -54,9 +52,11 @@ public class AccountingLedgerApp {
         System.out.print("L)Ledger\n");
         System.out.print("X)Exit");
     }
+
     //Method to get deposit information(date,time,description,vendor & amount) and write it to transaction.csv
     public static void addDeposit() {
         try {
+            //prompt the user for the deposit information.
             System.out.print("Enter your Deposit information : ");
             // Take inputs one by one
             String dateInput = validation("Enter the Date (yyyy-MM-dd): ");
@@ -86,7 +86,7 @@ public class AccountingLedgerApp {
 
             // Write the collected information to a file
             BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/transaction.csv", true));
-            writer.write( collectDepositInfo.toString());//Convert it to string even though it seems a String it's not.
+            writer.write(collectDepositInfo.toString());//Convert it to string even though it seems a String it's not.
             writer.close();
 
             System.out.println("\nDeposit Added to the file Successfully!");
@@ -95,19 +95,23 @@ public class AccountingLedgerApp {
             System.out.println("Error while adding deposit: " + e.getMessage());
         }
     }
+
     // method to validate if input to the questions is not valid for every question on the addDeposit method.
-    public static String validation(String ask) {
-        String input = "";
+    public static String validation(String ask) // return type string and parameter is the question I am asking at the addDeposit method.
+    {
+        String answer = "";// answer to the questions start with nothing
         while (true) {
-            System.out.print(ask);
-            input = myScanner.nextLine().trim();
-            if (input.isEmpty()) {
+            System.out.print(ask);//ask question to the user
+            answer = myScanner.nextLine().trim();//take the input from the users about the deposit information store it a variable.
+            if (answer.isEmpty()) {
+                //if the users pass empty input this will be display and continue asking the question.
                 System.out.println("Input cannot be empty. Please enter a valid response.");
+                continue;
             } else {
                 break;
             }
         }
-        return input;
+        return answer;// it will return me the answer to the question after validating .
     }
 
 }
