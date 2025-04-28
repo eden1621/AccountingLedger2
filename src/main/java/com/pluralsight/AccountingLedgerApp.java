@@ -18,27 +18,30 @@ public class AccountingLedgerApp {
     public static void main(String[] args) {
 
         //Display the menu page
-        homeScreen();
-        //take the option choice from the menu store it in variable called userChoice.
-        String actualChoice = myScanner.nextLine();
-        //If user chooses (D)
-        if (actualChoice.equalsIgnoreCase("D")) {
-            //ask the deposit information by invoking the addDeposit function.
-            addDeposit();
-            //If user choose (P)
-        } else if (actualChoice.equalsIgnoreCase("P")) {
-            System.out.println("not yet done");
-        }
-        //If user choose (L) show Ledger
-        else if (actualChoice.equalsIgnoreCase("L")) {
-            System.out.println("not yet done");
-        }
-        //If user choose (X) exit the application
-        else if (actualChoice.equalsIgnoreCase("X")) {
-            System.out.println("Goodbye!");
-            System.exit(0);  // Properly exit the program
-        } else {
-            System.out.println("Invalid option. Try again.");
+        while(true) {
+            homeScreen();
+
+            //take the option choice from the menu store it in variable called userChoice.
+            String actualChoice = myScanner.nextLine();
+            //If user chooses (D)
+            if (actualChoice.equalsIgnoreCase("D")) {
+                //ask the deposit information by invoking the addDeposit function.
+                addDeposit();
+                //If user choose (P)
+            } else if (actualChoice.equalsIgnoreCase("P")) {
+                System.out.println("not yet done");
+            }
+            //If user choose (L) show Ledger
+            else if (actualChoice.equalsIgnoreCase("L")) {
+                System.out.println("not yet done");
+            }
+            //If user choose (X) exit the application
+            else if (actualChoice.equalsIgnoreCase("X")) {
+                System.out.println("Goodbye!");
+                System.exit(0);  // Properly exit the program
+            } else {
+                System.out.println("Invalid option. Try again.");
+            }
         }
     }
 //**************************** HomeScreen Display Method **********************************************//
@@ -78,7 +81,7 @@ public class AccountingLedgerApp {
 
             String description = validation("Enter the Description: ");
             String vendor = validation("Enter the Vendor: ");
-            String amount = validation("Enter the Amount: ");
+            String amount = validation("Enter the Amount: ");//this a string so needed to be parsed to double.
 
             // Instantiate an object from our class transaction
             TransactionClass collectDepositInfo = new TransactionClass(date, time, description, vendor, Double.parseDouble(amount));
