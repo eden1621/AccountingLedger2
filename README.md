@@ -75,5 +75,5 @@ transactionList.add(transaction);
 ledgerService.saveTransaction(transaction);
 This made it easier to organize the transaction data and made the application more readable and maintainable.
 
-License
+## License
 N/A
