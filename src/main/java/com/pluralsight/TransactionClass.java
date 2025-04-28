@@ -1,18 +1,19 @@
 package com.pluralsight;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class TransactionClass {
 //attributes/feature what our application should have.
-    private String date;
-    private String time;
+    private LocalDate date;
+    private LocalTime time;
     private String description;
     private String vendor;
-    private String amount;
+    private double amount;
 
 //Constructor: for setting the requirement of our app / initializing the values.
 
-    public TransactionClass(String date, String time,String description, String vendor, String amount) {
+    public TransactionClass(LocalDate date, LocalTime time,String description, String vendor, double amount) {
         this.date = date;
         this.time = time;
         this.description = description;
@@ -20,24 +21,25 @@ public class TransactionClass {
         this.amount = amount;
     }
 
-//Method we need
+//Method if we need
 
 
 
 //getter and setter for accessing the attributes
-    public String getDate() {
+
+    public LocalDate getDate() {
         return this.date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public String getTime() {
+    public LocalTime getTime() {
         return this.time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
@@ -57,11 +59,11 @@ public class TransactionClass {
         this.vendor = vendor;
     }
 
-    public String getAmount() {
+    public double getAmount() {
         return this.amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 }

@@ -41,11 +41,16 @@ public class AccountingLedgerApp {
             System.out.println("Invalid option. Try again.");
         }
     }
+//**************************** HomeScreen Display Method **********************************************//
 
     //Method to display the menu options
     public static void homeScreen() {
 
         System.out.println("Welcome to Accounting Ledger App!!!");
+
+        System.out.println("------------------------------");
+
+
         System.out.print("What would you like to do?  Select A,B,or C.\n");
         System.out.print("D)Add Deposit\n");
         System.out.print("P)Make Payment(Debit)\n");
@@ -53,11 +58,17 @@ public class AccountingLedgerApp {
         System.out.print("X)Exit");
     }
 
+//***************************** End *********************************************************//
+
+//******************************* Add Deposit Method *********************************************************//
     //Method to get deposit information(date,time,description,vendor & amount) and write it to transaction.csv
     public static void addDeposit() {
         try {
             //prompt the user for the deposit information.
             System.out.print("Enter your Deposit information : ");
+
+            System.out.println("------------------------------");
+
             // Take inputs one by one
             String dateInput = validation("Enter the Date (yyyy-MM-dd): ");
             LocalDate date = LocalDate.parse(dateInput, formatter);
@@ -69,33 +80,22 @@ public class AccountingLedgerApp {
             String vendor = validation("Enter the Vendor: ");
             String amount = validation("Enter the Amount: ");
 
-            // Create the line using StringBuilder
-            StringBuilder collectDepositInfo = new StringBuilder();
-
-            //append all the information collected to the StringBuilder.
-            collectDepositInfo.append(date);
-            collectDepositInfo.append(" | ");
-            collectDepositInfo.append(time);
-            collectDepositInfo.append(" | ");
-            collectDepositInfo.append(description);
-            collectDepositInfo.append(" | ");
-            collectDepositInfo.append(vendor);
-            collectDepositInfo.append(" | ");
-            collectDepositInfo.append(amount);
-            collectDepositInfo.append("\n");
-
+            // Instantiate an object from our class transaction
+            TransactionClass collectDepositInfo = new TransactionClass(date, time, description, vendor, Double.parseDouble(amount));
             // Write the collected information to a file
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/transaction.csv", true));
-            writer.write(collectDepositInfo.toString());//Convert it to string even though it seems a String it's not.
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/transaction.csv",true));
+            writer.write(collectDepositInfo.getDate()+ "|" +  collectDepositInfo.getTime() + "|" + collectDepositInfo.getDescription() + "|" + collectDepositInfo.getVendor() + "|" + collectDepositInfo.getAmount());
+            writer.newLine();
             writer.close();
-
             System.out.println("\nDeposit Added to the file Successfully!");
 
         } catch (Exception e) {
             System.out.println("Error while adding deposit: " + e.getMessage());
         }
     }
+//***************************** End *********************************************************//
 
+//****************************************** Validation Method ********************************************************//
     // method to validate if input to the questions is not valid for every question on the addDeposit method.
     public static String validation(String ask) // return type string and parameter is the question I am asking at the addDeposit method.
     {
@@ -113,7 +113,11 @@ public class AccountingLedgerApp {
         }
         return answer;// it will return me the answer to the question after validating .
     }
+//***************************** End *********************************************************//
+    //Method for making a payment(Debit)
 
 }
+
+
 
 
