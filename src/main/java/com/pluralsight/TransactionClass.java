@@ -6,14 +6,16 @@ public class TransactionClass {
 //attributes/feature what our application should have.
     private String date;
     private String time;
+    private String description;
     private String vendor;
     private String amount;
 
 //Constructor: for setting the requirement of our app / initializing the values.
 
-    public TransactionClass(String date, String time, String vendor, String amount) {
+    public TransactionClass(String date, String time,String description, String vendor, String amount) {
         this.date = date;
         this.time = time;
+        this.description = description;
         this.vendor = vendor;
         this.amount = amount;
     }
@@ -24,7 +26,7 @@ public class TransactionClass {
 
 //getter and setter for accessing the attributes
     public String getDate() {
-        return date;
+        return this.date;
     }
 
     public void setDate(String date) {
@@ -32,15 +34,23 @@ public class TransactionClass {
     }
 
     public String getTime() {
-        return time;
+        return this.time;
     }
 
     public void setTime(String time) {
         this.time = time;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getVendor() {
-        return vendor;
+        return this.vendor;
     }
 
     public void setVendor(String vendor) {
@@ -48,7 +58,7 @@ public class TransactionClass {
     }
 
     public String getAmount() {
-        return amount;
+        return this.amount;
     }
 
     public void setAmount(String amount) {
