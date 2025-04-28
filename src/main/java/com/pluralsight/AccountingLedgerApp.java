@@ -73,14 +73,14 @@ public class AccountingLedgerApp {
             System.out.println("------------------------------");
 
             // Take inputs one by one
-            String dateInput = validation("Enter the Date (yyyy-MM-dd): ");
+            String dateInput = validation("Enter the Date (yyyy-MM-dd): \n");
             LocalDate date = LocalDate.parse(dateInput, formatter);
 
-            String timeInput = validation("Enter the Time (HH:mm:ss): ");
+            String timeInput = validation("Enter the Time (HH:mm:ss): \n");
             LocalTime time = LocalTime.parse(timeInput, formatter);
 
-            String description = validation("Enter the Description: ");
-            String vendor = validation("Enter the Vendor: ");
+            String description = validation("Enter the Description: \n");
+            String vendor = validation("Enter the Vendor: \n");
             String amount = validation("Enter the Amount: ");//this a string so needed to be parsed to double.
 
             // Instantiate an object from our class transaction
