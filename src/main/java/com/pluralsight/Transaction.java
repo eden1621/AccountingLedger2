@@ -3,7 +3,7 @@ package com.pluralsight;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class TransactionClass {
+public class Transaction {
 //attributes/feature what our application should have.
     private LocalDate date;
     private LocalTime time;
@@ -13,7 +13,7 @@ public class TransactionClass {
 
 //Constructor: for setting the requirement of our app / initializing the values.
 
-    public TransactionClass(LocalDate date, LocalTime time,String description, String vendor, double amount) {
+    public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount) {
         this.date = date;
         this.time = time;
         this.description = description;
