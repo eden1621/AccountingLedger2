@@ -20,32 +20,68 @@ public class AccountingLedgerApp {
     public static void main(String[] args) {
 
         //Display the menu page
-        while (true) {
+        boolean input = true;
+        while (input) {
             homeScreen();
-
             //take the option choice from the menu store it in variable called userChoice.
             String actualChoice = myScanner.nextLine();
             //If user chooses (D)
             if (actualChoice.equalsIgnoreCase("D")) {
                 //ask the deposit information by invoking the addDeposit function.
                 addDeposit();
-                //If user choose (P)
+            //If user choose (P)
             } else if (actualChoice.equalsIgnoreCase("P")) {
                 addPayment();
             }
             //If user choose (L) show Ledger
             else if (actualChoice.equalsIgnoreCase("L")) {
-                System.out.println("not yet done");
+                //=========================== Ledger Screen =====================
+                //Calling this method display the Ledger menu options
+                ledgerScreen();
+                //take the option choice from the menu store it in variable called userChoice.
+                String actualChoice1 = myScanner.nextLine();
+                //If user chooses (A)
+                switch (actualChoice1.toUpperCase()) {
+                    // If user chose "A" or "a"
+                    case "A":
+                    //Call method to read and display all transactions (deposits and payments)
+                    //readAll();
+                    break;
+                    // If user chose "D"
+                    case "D":// Call method to read and display only deposit (positive amount) transactions
+                    //readDeposit();
+                    break;
+                    // If user chose "P"
+                    case "P":
+                    // Call method to read and display only payment (negative amount) transactions
+                    //readPayment();
+                    break;
+                    // If user chose "R" or "r"
+                    case "R":
+                    // Call method to display the Reports menu screen
+                    //reportScreen();
+                    break;
+                    // If user chose "H" or "h"
+                    case "H":
+                    // Return to the Home screen
+                    homeScreen();
+                    break;
+                    // If user entered any invalid option
+                    default:
+                    System.out.println("Invalid option. Try again.");
+                    break;
+                }
             }
             //If user choose (X) exit the application
             else if (actualChoice.equalsIgnoreCase("X")) {
                 System.out.println("Goodbye!");
-                System.exit(0);  // Properly exit the program
+                System.exit(0);  // Properly exit the program// we can turn the boolean to false
             } else {
                 System.out.println("Invalid option. Try again.");
             }
         }
     }
+
 //**************************** HomeScreen Display Method **********************************************//
 
 // Method to display the menu options
@@ -170,7 +206,6 @@ public static void addPayment() {
 }
 //***************************** End of addPayment *********************************************************//
 
-
 //****************************************** Validation Method ********************************************//
 // method to validate if input to the questions is not valid for every question on the addDeposit method.
 public static String validation(String ask) {// return type string and parameter is the question I am asking at the addDeposit method.
@@ -193,17 +228,16 @@ public static String validation(String ask) {// return type string and parameter
     // Method to display the menu options
     public static void ledgerScreen() {
         System.out.println("-----------------------------------");
-        System.out.println("Welcome to Accounting Ledger App!!!");
+        System.out.println("Welcome to The Ledger Screen !!!");
         System.out.println("-----------------------------------");
 
-        System.out.print("What would you like to do?  Select D,P, L or X.\n");
-        System.out.print("D)Add Deposit\n");
-        System.out.print("P)Make Payment(Debit)\n");
-        System.out.print("L)Ledger\n");
-        System.out.print("X)Exit\n");
+        System.out.print("What would you like to do?  Select A,D, P,R or H.\n");
+        System.out.print("A)All Entries \n");
+        System.out.print("D)Deposit Only)\n");
+        System.out.print("P)Payments Only \n");
+        System.out.print("R)Reports\n");
+        System.out.print("H)Home-Screen \n");
     }
-// ============================ End LEDGER SCREEN ============================== //
-
 // ============================ End LEDGER SCREEN ============================== //
 
 // ============================ LEDGER All Entries(A) ============================== //
