@@ -219,7 +219,7 @@ public static void addDeposit() {
 
         System.out.print("What would you like to do?  Select A,D, P,R or H.\n");
         System.out.print("A)All Entries \n");
-        System.out.print("D)Deposit Only)\n");
+        System.out.print("D)Deposit Only\n");
         System.out.print("P)Payments Only \n");
         System.out.print("R)Reports\n");
         System.out.print("H)Home-Screen \n");
