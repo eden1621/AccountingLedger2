@@ -1,89 +1,86 @@
 package com.pluralsight;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AccountingLedgerApp {
 
-    //declare the scanner and datetime formatter as a static to be able to use it throughout the class.
-    static Scanner myScanner = new Scanner(System.in);
-    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
-    static DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("HH:mm:ss");
-
+//declare the scanner and datetime formatter as a static to be able to use it throughout the class.
+static Scanner myScanner = new Scanner(System.in);
+static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
+static DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("HH:mm:ss");
+static ArrayList<Transaction> allTransaction = new ArrayList<>();
 // static LocalDateTime dateTimeConvert = LocalDateTime.parse( "date time", formatter);
 
-    public static void main(String[] args) {
+public static void main(String[] args) {
 
-        //Display the menu page
-        boolean input = true;
-        while (input) {
-            homeScreen();
-            //take the option choice from the menu store it in variable called userChoice.
-            String actualChoice = myScanner.nextLine();
-            //If user chooses (D)
-            if (actualChoice.equalsIgnoreCase("D")) {
-                //ask the deposit information by invoking the addDeposit function.
-                addDeposit();
+    //Display the menu page
+    boolean input = true;
+    while (input) {
+        homeScreen();
+        //take the option choice from the menu store it in variable called userChoice.
+        String actualChoice = myScanner.nextLine();
+        //If user chooses (D)
+        if (actualChoice.equalsIgnoreCase("D")) {
+            //ask the deposit information by invoking the addDeposit function.
+            addDeposit();
             //If user choose (P)
-            } else if (actualChoice.equalsIgnoreCase("P")) {
-                addPayment();
-            }
-            //If user choose (L) show Ledger
-            else if (actualChoice.equalsIgnoreCase("L")) {
-                //=========================== Ledger Screen =====================
-                //Calling this method display the Ledger menu options
-                ledgerScreen();
-                //take the option choice from the menu store it in variable called userChoice.
-                String actualChoice1 = myScanner.nextLine();
-                //If user chooses (A)
-                switch (actualChoice1.toUpperCase()) {
-                    // If user chose "A" or "a"
-                    case "A":
+        } else if (actualChoice.equalsIgnoreCase("P")) {
+            addPayment();
+        }
+        //If user choose (L) show Ledger
+        else if (actualChoice.equalsIgnoreCase("L")) {
+            //=========================== Ledger Screen =====================
+            //Calling this method display the Ledger menu options
+            ledgerScreen();
+            //take the option choice from the menu store it in variable called userChoice.
+            String actualChoice1 = myScanner.nextLine();
+            //If user chooses (A)
+            switch (actualChoice1.toUpperCase()) {
+                // If user chose "A" or "a"
+                case "A":
                     //Call method to read and display all transactions (deposits and payments)
-                    //readAll();
+                    showTransaction();
                     break;
-                    // If user chose "D"
-                    case "D":// Call method to read and display only deposit (positive amount) transactions
-                    //readDeposit();
+                // If user chose "D"
+                case "D":// Call method to read and display only deposit (positive amount) transactions
+                    readDeposit();
                     break;
-                    // If user chose "P"
-                    case "P":
+                // If user chose "P"
+                case "P":
                     // Call method to read and display only payment (negative amount) transactions
-                    //readPayment();
+                    readPayment();
                     break;
-                    // If user chose "R" or "r"
-                    case "R":
+                // If user chose "R" or "r"
+                case "R":
                     // Call method to display the Reports menu screen
                     //reportScreen();
                     break;
-                    // If user chose "H" or "h"
-                    case "H":
+                // If user chose "H" or "h"
+                case "H":
                     // Return to the Home screen
                     homeScreen();
                     break;
-                    // If user entered any invalid option
-                    default:
+                // If user entered any invalid option
+                default:
                     System.out.println("Invalid option. Try again.");
                     break;
-                }
-            }
-            //If user choose (X) exit the application
-            else if (actualChoice.equalsIgnoreCase("X")) {
-                System.out.println("Goodbye!");
-                System.exit(0);  // Properly exit the program// we can turn the boolean to false
-            } else {
-                System.out.println("Invalid option. Try again.");
             }
         }
+        //If user choose (X) exit the application
+        else if (actualChoice.equalsIgnoreCase("X")) {
+            System.out.println("Goodbye!");
+            input = false;  // Properly exit the program// we can turn the boolean to false
+        } else {
+            System.out.println("Invalid option. Try again.");
+        }
     }
-
+}
 //**************************** HomeScreen Display Method **********************************************//
-
 // Method to display the menu options
 public static void homeScreen() {
     System.out.println("-----------------------------------");
@@ -96,83 +93,28 @@ public static void homeScreen() {
     System.out.print("L)Ledger\n");
     System.out.print("X)Exit\n");
 }
-
 //***************************** End *********************************************************//
 
 //******************************* Add Deposit Method ******************************************************//
-
 //Method to get deposit information(date,time,description,vendor & amount) and write it to transaction.csv
 public static void addDeposit() {
     //wrap the question with answer return in a while loop because I want to ask each question again if it is not valid.
-        try {
-            //first create a file and write the header (only if file is new)
-            String fileCsv = "src/main/resources/transaction.csv";//declare the file name we want with a path.
-
-            BufferedWriter writer = new BufferedWriter(new FileWriter(fileCsv, true));//write true so it doesn't overwrite the file.Keep old records.
-
-            //Set condition to write the header => create only if the file is empty so that it won't repeat.
-            File file = new File(fileCsv);// This I got from AI
-            if (file.length() == 0) {
-                writer.write("Date | Time | Description | Vendor | Amount ");
-            }
-            writer.newLine();//to move to next line after header
-
-            //prompt the user for the deposit information.
-            System.out.println("------------------------------");
-            System.out.print("Enter your Deposit information : \n");
-            System.out.println("------------------------------\n");
-
-            //passing the questions in the method validation that return the answer and validate it and store it a variable that describe it.
-
-            String description = validation("Enter the Description: \n");
-            String vendor = validation("Enter the Vendor: \n");
-            String amount = validation("Enter the Amount: \n");//this a string so needed to be parsed to double.
-            //amount is a double in the Transaction class but when we received it as answer it is a string.
-            // The date and time stamp will be added to the file automatically
-            LocalDate date = LocalDate.now();
-            LocalTime time = LocalTime.now().withNano(0); // remove nanoseconds for cleaner output=>can also pass the formatter (time.format(formatter1)/date.format(formatter2)
-            date.format(formatter);
-            time.format(formatter1);
-
-            // Write the collected information to a file in a format required
-            // Instantiate an object from our class transaction
-            Transaction collectDepositInfo = new Transaction(date, time, description, vendor, Double.parseDouble(amount));
-
-            //write the deposit information to the transaction.csv in this format.
-            writer.write(collectDepositInfo.getDate() + " | " + collectDepositInfo.getTime() + " | " + collectDepositInfo.getDescription() + " | " + collectDepositInfo.getVendor() + " | " + collectDepositInfo.getAmount());
-            writer.newLine();//write on new line=> format when it's written in the file.
-            writer.close();//closing the buffer the writer.
-            //Display this message if done correctly
-            System.out.println("\nDeposit Added to the file Successfully!");
-
-        } catch (Exception e) {
-            System.out.println("Error while adding deposit: " + e.getMessage());
-        }
-}
-
-//***************************** End of addDeposit *********************************************************//
-
-//******************************* Add Payment+ Method *****************************************************//
-//Method to get payment information(date,time,description,vendor & amount) and write it to transaction.csv
-public static void addPayment() {
-    boolean input = true;
-    //wrap the question with answer return in a while loop because I want to ask each question again if it is not valid.
     try {
-//            //first create a file and write the header (only if file is new)
+        //first create a file and write the header (only if file is new)
         String fileCsv = "src/main/resources/transaction.csv";//declare the file name we want with a path.
-//
+
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileCsv, true));//write true so it doesn't overwrite the file.Keep old records.
 
         //Set condition to write the header => create only if the file is empty so that it won't repeat.
-//            File file = new File(fileCsv);// This I got from AI
-//            if (file.length() == 0) {
-//                writer.write("Date | Time | Description | Vendor | Amount ");
-//            }
-//            writer.newLine();//to move to next line after header
+        File file = new File(fileCsv);// This I got from AI
+        if (file.length() == 0) {
+            writer.write("Date | Time | Description | Vendor | Amount ");
+        }
+        writer.newLine();//to move to next line after header
 
-        //prompt the user for the payment information.
+        //prompt the user for the deposit information.
         System.out.println("------------------------------");
-        System.out.print("Enter your Debit information : \n");
+        System.out.print("Enter your Deposit information : \n");
         System.out.println("------------------------------\n");
 
         //passing the questions in the method validation that return the answer and validate it and store it a variable that describe it.
@@ -189,43 +131,88 @@ public static void addPayment() {
 
         // Write the collected information to a file in a format required
         // Instantiate an object from our class transaction
-        double amountDouble = Double.parseDouble(amount);
-        amountDouble = -1 * Math.abs(amountDouble);
-        Transaction collectDebitInfo = new Transaction(date, time, description, vendor,amountDouble );
+        Transaction collectDepositInfo = new Transaction(date, time, description, vendor, Double.parseDouble(amount));
 
-        //write the payment information to the transaction.csv in this format.
-        writer.write(collectDebitInfo.getDate() + " | " + collectDebitInfo.getTime() + " | " + collectDebitInfo.getDescription() + " | " + collectDebitInfo.getVendor() + " | " + collectDebitInfo.getAmount());
+        //write the deposit information to the transaction.csv in this format.
+        writer.write(collectDepositInfo.getDate() + " | " + collectDepositInfo.getTime() + " | " + collectDepositInfo.getDescription() + " | " + collectDepositInfo.getVendor() + " | " + collectDepositInfo.getAmount());
         writer.newLine();//write on new line=> format when it's written in the file.
         writer.close();//closing the buffer the writer.
         //Display this message if done correctly
-        System.out.println("\nPayment Added to the file Successfully!");
+        System.out.println("\nDeposit Added to the file Successfully!");
 
     } catch (Exception e) {
-        System.out.println("Error while adding payment: " + e.getMessage());
+        System.out.println("Error while adding deposit: " + e.getMessage());
     }
 }
+//***************************** End of addDeposit *********************************************************//
+
+//******************************* Add Payment+ Method *****************************************************//
+//Method to get payment information(date,time,description,vendor & amount) and write it to transaction.csv
+    public static void addPayment() {
+        boolean input = true;
+        //wrap the question with answer return in a while loop because I want to ask each question again if it is not valid.
+        try {//first create a file and write the header (only if file is new)
+            String fileCsv = "src/main/resources/transaction.csv";//declare the file name we want with a path.
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileCsv, true));//write true so it doesn't overwrite the file.Keep old records.
+
+            //prompt the user for the payment information.
+            System.out.println("------------------------------");
+            System.out.print("Enter your Debit information : \n");
+            System.out.println("------------------------------\n");
+
+            //passing the questions in the method validation that return the answer and validate it and store it a variable that describe it.
+
+            String description = validation("Enter the Description: \n");
+            String vendor = validation("Enter the Vendor: \n");
+            String amount = validation("Enter the Amount: \n");//this a string so needed to be parsed to double.
+            //amount is a double in the Transaction class but when we received it as answer it is a string.
+            // The date and time stamp will be added to the file automatically
+            LocalDate date = LocalDate.now();
+            LocalTime time = LocalTime.now().withNano(0); // remove nanoseconds for cleaner output=>can also pass the formatter (time.format(formatter1)/date.format(formatter2)
+            date.format(formatter);
+            time.format(formatter1);
+
+            // Write the collected information to a file in a format required
+            // Instantiate an object from our class transaction
+            double amountDouble = Double.parseDouble(amount);
+            amountDouble = -1 * Math.abs(amountDouble);
+            Transaction collectDebitInfo = new Transaction(date, time, description, vendor, amountDouble);
+
+            //write the payment information to the transaction.csv in this format.
+            writer.write(collectDebitInfo.getDate() + " | " + collectDebitInfo.getTime() + " | " + collectDebitInfo.getDescription() + " | " + collectDebitInfo.getVendor() + " | " + collectDebitInfo.getAmount());
+            writer.newLine();//write on new line=> format when it's written in the file.
+            writer.close();//closing the buffer the writer.
+            //Display this message if done correctly
+            System.out.println("\nPayment Added to the file Successfully!");
+            /*maybe ask if they want to make a payment again =>System.out.println("Add another transaction? (Y for yes/ N for no)");
+             */
+        } catch (Exception e) {
+            System.out.println("Error while adding payment: " + e.getMessage());
+        }
+    }
 //***************************** End of addPayment *********************************************************//
 
 //****************************************** Validation Method ********************************************//
 // method to validate if input to the questions is not valid for every question on the addDeposit method.
-public static String validation(String ask) {// return type string and parameter is the question I am asking at the addDeposit method.
-    String answer = "";// answer to the questions start with nothing
-    while (true) {
-        System.out.print(ask);//ask question to the user
-        answer = myScanner.nextLine().trim();//take the input from the users about the deposit information store it a variable.
-        if (answer.isEmpty()) {
-            //if the users pass empty input this will be display and continue asking the question.
-            System.out.println("Input cannot be empty. Please enter a valid response.");
-        } else {
-            break;
+    public static String validation(String ask) {// return type string and parameter is the question I am asking at the addDeposit method.
+        String answer = "";// answer to the questions start with nothing
+        while (true) {
+            System.out.print(ask);//ask question to the user
+            answer = myScanner.nextLine().trim();//take the input from the users about the deposit information store it a variable.
+            if (answer.isEmpty()) {
+                //if the users pass empty input this will be display and continue asking the question.
+                System.out.println("Input cannot be empty. Please enter a valid response.");
+            } else {
+                break;
+            }
         }
+        return answer;// it will return me the answer to the question after validating .
     }
-    return answer;// it will return me the answer to the question after validating .
-}
 //***************************** End of validation *********************************************************//
 
 // ============================ LEDGER SCREEN ============================== //
-    // Method to display the menu options
+// Method to display the menu options
     public static void ledgerScreen() {
         System.out.println("-----------------------------------");
         System.out.println("Welcome to The Ledger Screen !!!");
@@ -241,31 +228,112 @@ public static String validation(String ask) {// return type string and parameter
 // ============================ End LEDGER SCREEN ============================== //
 
 // ============================ LEDGER All Entries(A) ============================== //
+//Method to Read All the entries to show when called in the main method.
+public static ArrayList<Transaction> getTransaction() {
+//instantiate a new object that is an ArrayList from transaction class.
+try {
+    //To read from the file with a booster buffer.
+    BufferedReader transactionRead = new BufferedReader(new FileReader("src/main/resources/transaction.csv"));//reading the file
+    // we are looping to read the transaction file line by line if it's not empty.
+  //transactionRead.readLine();
+    String theLine;
+    while ((theLine = transactionRead.readLine()) != null) {
+        //created a product using the product class and pieces of the string .split("\\|")
+        String[] transactionInfo = theLine.split("\\|");
+        //If the line start with Date skip it to read the next line.
+        if (transactionInfo[0].startsWith("Date")) {
+            continue;
+        }
+    // Use.trim() on each element to avoid parsing errors.
+    // because the csv file contains extra spaces around the pipe symbol,
+        LocalDate dateStamp = LocalDate.parse(transactionInfo[0].trim());
+        LocalTime timeStamp = LocalTime.parse(transactionInfo[1].trim());
+        String description = transactionInfo[2].trim();
+        String vendor = transactionInfo[3].trim();
+        double amount = Double.parseDouble(transactionInfo[4].trim());
+//if (transactionInfo.length == 5){
 
+    //instantiate a new theTransaction object from transaction class and pass in argument.
+        Transaction theTransaction = new Transaction( dateStamp,timeStamp,
+                description,vendor,amount);
+
+    //add that transactions to the allTransaction array list using allTransaction.add
+    allTransaction.add(theTransaction);
+    }
+    //Close the buffer.
+    transactionRead.close();
+     } catch(Exception e){
+        System.out.print("Error reading Transaction file." + e.getMessage() + e.getStackTrace() );
+
+     }
+     return allTransaction;
+    }
+// method for Showing all the transaction to display on the console
+public static void showTransaction(){
+//put all the transaction in the allTransaction container when this method is called
+     getTransaction();  // Capture the returned list  getTransaction();
+// ?made this global with static to access throughout the class.
+    //Display message
+    System.out.println("This is all the transactions");
+    System.out.println("Date | Time | Description | Vendor | Amount ");
+    //sorting the transaction in descending order.//temporary object
+    allTransaction.sort((t1,t2)-> {
+                int dateCompare = t2.getDate().compareTo(t1.getDate());
+                if (dateCompare != 0) {
+                    return dateCompare;
+                }
+                return t2.getTime().compareTo(t1.getTime());});//will check using the time if 2 dates are equal.
+    //loop through it to  display and show :-
+     for (int i = 0; i < allTransaction.size(); i++) {
+         Transaction t = allTransaction.get(i);
+     //display all transaction with its Date,Time,Description,Vendor, & amount.
+       System.out.println(t);// because we are calling the toString method.getDate()+ " | " + t.getTime()+ " | " + t.getDescription() + " | " + t.getVendor()+ " | " + t.getAmount());
+        }
+}
 // ============================ End All Entries(A) ============================== //
 
 // ============================ LEDGER Deposit Only(D) ============================== //
-
+public static void readDeposit(){
+    for(int i=0; i<allTransaction.size(); i++){
+        if(amount >= 0){
+            System.out.println();
+        }
+    }
+}
 // ============================ End  Deposit Only ============================== //
 
 // ============================ LEDGER Payment Only(P) ============================== //
+public static void readPayment(){
+    for(int i=0; i<allTransaction.size(); i++){
 
+        if(amount <= 0){
+            System.out.println();
+        }
+    }
+}
 // ============================ End Payment Only ============================== //
-
 
 }
 
 
 
+/* =creating arrayList container that hold all the transaction that is written
+transaction.csv => main /we import arraylist => ArrayList<Transaction> allTransaction = getTransaction(); and
+ display System.out.println("This is all the transaction" => this method  will be invoked/called getTransaction()
 
+  //put all the transaction in the allTransaction container
+ ArrayList<Transaction> allTransaction = getTransaction();
+ //Display message
+  System.out.println("This is all the transaction";
+  //loop through it to  display and show :-
+  // for (int i = 0; i < allTransaction.size(); i++) {
+  //            Transaction t = allTransaction.get(i);
+  //            //display all transaction with its Date,Time,Description,Vendor, & amount.
+  //            System.out.printf("id: %d %s - Price: $%.2f%n",//this need to keep the format when displaying
+  //                    t.getDate(), t.getTime(), t.getDescription(),t.getVendor(), t.getAmount());
+  //        }
 
-
-
-
-
-
-//Method for making a payment(Debit)
-
+ */
 
 
 //log file to check for the search filter later

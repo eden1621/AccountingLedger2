@@ -5,14 +5,13 @@ import java.time.LocalTime;
 
 public class Transaction {
 //attributes/feature what our application should have.
-    private LocalDate date;
-    private LocalTime time;
-    private String description;
-    private String vendor;
-    private double amount;
+    private final LocalDate date;
+    private final LocalTime time;
+    private final String description;
+    private final String vendor;
+    private final double amount;
 
 //Constructor: for setting the requirement of our app / initializing the values.
-
     public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount) {
         this.date = date;
         this.time = time;
@@ -20,7 +19,6 @@ public class Transaction {
         this.vendor = vendor;
         this.amount = amount;
     }
-
 //Method if we need
 
 
@@ -30,40 +28,20 @@ public class Transaction {
     public LocalDate getDate() {
         return this.date;
     }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
     public LocalTime getTime() {
         return this.time;
     }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
-
     public String getDescription() {
         return this.description;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getVendor() {
         return this.vendor;
     }
-
-    public void setVendor(String vendor) {
-        this.vendor = vendor;
-    }
-
     public double getAmount() {
         return this.amount;
     }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
+@Override
+    public String toString() {
+        return String.format(date.toString()+ " | " + time.toString()+" | "+ description+ " | "+ vendor+ " | "+amount );
     }
 }
