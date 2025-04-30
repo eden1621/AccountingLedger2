@@ -149,8 +149,7 @@ public static void addDeposit() {
 //******************************* Add Payment+ Method *****************************************************//
 //Method to get payment information(date,time,description,vendor & amount) and write it to transaction.csv
     public static void addPayment() {
-        boolean input = true;
-        //wrap the question with answer return in a while loop because I want to ask each question again if it is not valid.
+
         try {//first create a file and write the header (only if file is new)
             String fileCsv = "src/main/resources/transaction.csv";//declare the file name we want with a path.
 
@@ -251,6 +250,7 @@ try {
         String description = transactionInfo[2].trim();
         String vendor = transactionInfo[3].trim();
         double amount = Double.parseDouble(transactionInfo[4].trim());
+
 //if (transactionInfo.length == 5){
 
     //instantiate a new theTransaction object from transaction class and pass in argument.
@@ -276,7 +276,7 @@ public static void showTransaction(){
     //Display message
     System.out.println("This is all the transactions");
     System.out.println("Date | Time | Description | Vendor | Amount ");
-    //sorting the transaction in descending order.//temporary object
+    //sorting the transaction in descending order.//temporary object got this method from my peers.
     allTransaction.sort((t1,t2)-> {
                 int dateCompare = t2.getDate().compareTo(t1.getDate());
                 if (dateCompare != 0) {
@@ -294,22 +294,45 @@ public static void showTransaction(){
 
 // ============================ LEDGER Deposit Only(D) ============================== //
 public static void readDeposit(){
-    for(int i=0; i<allTransaction.size(); i++){
-        if(amount >= 0){
-            System.out.println();
-        }
+//call this method for reading from the files
+getTransaction();
+//Got this sort method from the showTransaction method copy & pasta hehe but I should create method to DRY.
+allTransaction.sort((t1,t2)-> {
+    int dateCompare = t2.getDate().compareTo(t1.getDate());
+    if (dateCompare != 0) {
+        return dateCompare;
     }
+    return t2.getTime().compareTo(t1.getTime());});//will check using the time if 2 dates are equal.
+
+for(int i=0; i<allTransaction.size(); i++){
+    // Get each transaction one at a time
+    Transaction t = allTransaction.get(i);
+    if(t.getAmount() > 0){
+        System.out.println(t);
+    }
+}
 }
 // ============================ End  Deposit Only ============================== //
 
 // ============================ LEDGER Payment Only(P) ============================== //
 public static void readPayment(){
-    for(int i=0; i<allTransaction.size(); i++){
-
-        if(amount <= 0){
-            System.out.println();
-        }
+//call this method for reading from the files
+getTransaction();
+//Got this sort method from the showTransaction method copy & pasta hehe,but I should create method to DRY.
+allTransaction.sort((t1,t2)-> {
+    int dateCompare = t2.getDate().compareTo(t1.getDate());
+    if (dateCompare != 0) {
+        return dateCompare;
     }
+    return t2.getTime().compareTo(t1.getTime());});//will check using the time if 2 dates are equal.
+
+for(int i=0; i<allTransaction.size(); i++){
+    // Get each transaction one at a time
+    Transaction t = allTransaction.get(i);
+    if(t.getAmount() < 0){
+        System.out.println(t);
+    }
+}
 }
 // ============================ End Payment Only ============================== //
 

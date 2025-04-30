@@ -40,8 +40,8 @@ public class Transaction {
     public double getAmount() {
         return this.amount;
     }
-@Override
+@Override //got this method from my peers
     public String toString() {
-        return String.format(date.toString()+ " | " + time.toString()+" | "+ description+ " | "+ vendor+ " | "+amount );
+        return String.format("Date "+ date.toString()+ " | " + "Time "  + time.toString()+" | "+ "Description " + description+ " | "+ "vendor "+ vendor+ " | "+"amount " + amount );
     }
 }
