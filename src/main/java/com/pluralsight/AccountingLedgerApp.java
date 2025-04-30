@@ -19,9 +19,23 @@ static ArrayList<Transaction> allTransaction = new ArrayList<>();
 public static void main(String[] args) {
 
     //Display the menu page
+        homeScreen();
+}
+//**************************** HomeScreen Display Method **********************************************//
+// Method to display the menu options
+public static void homeScreen() {
     boolean input = true;
     while (input) {
-        homeScreen();
+        System.out.println("-----------------------------------");
+        System.out.println("Welcome to Accounting Ledger App!!!");
+        System.out.println("-----------------------------------");
+
+        System.out.print("What would you like to do?  Select D,P, L or X.\n");
+        System.out.print("D)Add Deposit\n");
+        System.out.print("P)Make Payment(Debit)\n");
+        System.out.print("L)Ledger\n");
+        System.out.print("X)Exit\n");
+
         //take the option choice from the menu store it in variable called userChoice.
         String actualChoice = myScanner.nextLine();
         //If user chooses (D)
@@ -37,39 +51,6 @@ public static void main(String[] args) {
             //=========================== Ledger Screen =====================
             //Calling this method display the Ledger menu options
             ledgerScreen();
-            //take the option choice from the menu store it in variable called userChoice.
-            String actualChoice1 = myScanner.nextLine();
-            //If user chooses (A)
-            switch (actualChoice1.toUpperCase()) {
-                // If user chose "A" or "a"
-                case "A":
-                    //Call method to read and display all transactions (deposits and payments)
-                    showTransaction();
-                    break;
-                // If user chose "D"
-                case "D":// Call method to read and display only deposit (positive amount) transactions
-                    readDeposit();
-                    break;
-                // If user chose "P"
-                case "P":
-                    // Call method to read and display only payment (negative amount) transactions
-                    readPayment();
-                    break;
-                // If user chose "R" or "r"
-                case "R":
-                    // Call method to display the Reports menu screen
-                    //reportScreen();
-                    break;
-                // If user chose "H" or "h"
-                case "H":
-                    // Return to the Home screen
-                    homeScreen();
-                    break;
-                // If user entered any invalid option
-                default:
-                    System.out.println("Invalid option. Try again.");
-                    break;
-            }
         }
         //If user choose (X) exit the application
         else if (actualChoice.equalsIgnoreCase("X")) {
@@ -79,20 +60,7 @@ public static void main(String[] args) {
             System.out.println("Invalid option. Try again.");
         }
     }
-}
-//**************************** HomeScreen Display Method **********************************************//
-// Method to display the menu options
-public static void homeScreen() {
-    System.out.println("-----------------------------------");
-    System.out.println("Welcome to Accounting Ledger App!!!");
-    System.out.println("-----------------------------------");
-
-    System.out.print("What would you like to do?  Select D,P, L or X.\n");
-    System.out.print("D)Add Deposit\n");
-    System.out.print("P)Make Payment(Debit)\n");
-    System.out.print("L)Ledger\n");
-    System.out.print("X)Exit\n");
-}
+}/* Display welcome message and options on the screen/console*/
 //***************************** End *********************************************************//
 
 //******************************* Add Deposit Method ******************************************************//
@@ -106,8 +74,9 @@ public static void addDeposit() {
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileCsv, true));//write true so it doesn't overwrite the file.Keep old records.
 
         //Set condition to write the header => create only if the file is empty so that it won't repeat.
-        File file = new File(fileCsv);// This I got from AI
-        if (file.length() == 0) {
+        File file = new File(fileCsv);// This I got from AI =>this doesn't write, just points to the file
+
+        if (file.length() == 0) {  // checks if file is empty
             writer.write("Date | Time | Description | Vendor | Amount ");
         }
         writer.newLine();//to move to next line after header
@@ -143,6 +112,13 @@ public static void addDeposit() {
     } catch (Exception e) {
         System.out.println("Error while adding deposit: " + e.getMessage());
     }
+    /*Create csv file and activate our File/Buffered writer with the path of our file.
+     * Prompt user to answer deposit info using validation method and store it in variable.
+     * Get the Date and Time stamp with formatter better than using default
+     * Convert the amount to double because it's string and store in variable.
+     * Create an object to collect the csv files data  pass argument.
+     * we write on the object with the format passed.
+     * Then print success message once done  */
 }
 //***************************** End of addDeposit *********************************************************//
 
@@ -184,11 +160,17 @@ public static void addPayment() {
         writer.close();//closing the buffer the writer.
         //Display this message if done correctly
         System.out.println("\nPayment Added to the file Successfully!");
-        /*maybe ask if they want to make a payment again =>System.out.println("Add another transaction? (Y for yes/ N for no)");
-         */
     } catch (Exception e) {
         System.out.println("Error while adding payment: " + e.getMessage());
     }
+    /*Create csv file and activate our File/Buffered writer with the path of our file.
+    * Prompt user to answer deposit info using validation method and store it in variable.
+    * Get the Date and Time stamp with formatter better than using default
+    * Convert the amount to double because it's string and store in variable.
+    * Then do Math.abs to get the absolut value and times it with -1 to have negative because we are dealing with payments.
+    * Create an object to collect the csv files data  pass argument.
+    * we write on the object with the format we want  the information we want to get.
+    * Then print success message once done  */
 }
 //***************************** End of addPayment *********************************************************//
 
@@ -208,22 +190,64 @@ public static String validation(String ask) {// return type string and parameter
     }
     return answer;// it will return me the answer to the question after validating .
 }
+/*method that have a parameter of string.
+* Assist on first ask questions and take user input
+* Based on the input evaluate the condition and return the answer.*/
 //***************************** End of validation *********************************************************//
 
 // ============================ LEDGER SCREEN ============================== //
 // Method to display the menu options
 public static void ledgerScreen() {
-    System.out.println("-----------------------------------");
-    System.out.println("Welcome to The Ledger Screen !!!");
-    System.out.println("-----------------------------------");
+    boolean askAgain = true;
+    while (askAgain) {
+        System.out.println("-----------------------------------");
+        System.out.println("Welcome to The Ledger Screen !!!");
+        System.out.println("-----------------------------------");
 
-    System.out.print("What would you like to do?  Select A,D, P,R or H.\n");
-    System.out.print("A)All Entries \n");
-    System.out.print("D)Deposit Only\n");
-    System.out.print("P)Payments Only \n");
-    System.out.print("R)Reports\n");
-    System.out.print("H)Home-Screen \n");
+        System.out.print("What would you like to do?  Select A,D, P,R or H.\n");
+        System.out.print("A)All Entries \n");
+        System.out.print("D)Deposit Only\n");
+        System.out.print("P)Payments Only \n");
+        System.out.print("R)Reports\n");
+        System.out.print("H)Home-Screen \n");
+
+        //take the option choice from the menu store it in variable called userChoice.
+        String actualChoice1 = myScanner.nextLine();
+        //If user chooses (A)
+        switch (actualChoice1.toUpperCase()) {
+            // If user chose "A" or "a"
+            case "A":
+                //Call method to read and display all transactions (deposits and payments)
+                showTransaction();
+                break;
+            // If user chose "D"
+            case "D":// Call method to read and display only deposit (positive amount) transactions
+                readDeposit();
+                break;
+            // If user chose "P"
+            case "P":
+                // Call method to read and display only payment (negative amount) transactions
+                readPayment();
+                break;
+            // If user chose "R" or "r"
+            case "R":
+                // Call method to display the Reports menu screen
+                reportScreen();
+                break;
+            // If user chose "H" or "h"
+            case "H":
+                // Return to the Home screen
+                homeScreen();
+                break;
+            // If user entered any invalid option
+            default:
+                System.out.println("Invalid option. Try again.");
+                break;
+        }
+
+    }
 }
+/* Display on the console the option for LedgerScreen*/
 // ============================ End LEDGER SCREEN ============================== //
 
 // ============================ LEDGER All Entries(A) ============================== //
@@ -234,13 +258,12 @@ try {
     //To read from the file with a booster buffer.
     BufferedReader transactionRead = new BufferedReader(new FileReader("src/main/resources/transaction.csv"));//reading the file
     // we are looping to read the transaction file line by line if it's not empty.
-  //transactionRead.readLine();
     String theLine;
     while ((theLine = transactionRead.readLine()) != null) {
         //created a product using the product class and pieces of the string .split("\\|")
         String[] transactionInfo = theLine.split("\\|");
         //If the line start with Date skip it to read the next line.
-        if (transactionInfo[0].startsWith("Date")) {
+        if(transactionInfo.length !=5 || transactionInfo[0].startsWith("Date")) {
             continue;
         }
     // Use.trim() on each element to avoid parsing errors.
@@ -254,7 +277,7 @@ try {
 //if (transactionInfo.length == 5){
 
     //instantiate a new theTransaction object from transaction class and pass in argument.
-        Transaction theTransaction = new Transaction( dateStamp,timeStamp,
+        Transaction theTransaction = new Transaction(dateStamp,timeStamp,
                 description,vendor,amount);
 
     //add that transactions to the allTransaction array list using allTransaction.add
@@ -263,11 +286,18 @@ try {
     //Close the buffer.
     transactionRead.close();
      } catch(Exception e){
-        System.out.print("Error reading Transaction file." + e.getMessage() + e.getStackTrace() );
-
+        System.out.print("Error reading Transaction file." + e.getMessage() + e.getStackTrace());
      }
      return allTransaction;
     }
+/*FileReader opens the file.
+*BufferedReader reads bigger chunks of text for better performance.
+*While loop keeps reading each line until there are no more lines (null).
+*Put what we read in an array of string by splitting it.
+* Parse it when access and store it a variable.
+*Create object to hold our list of items.
+*Add our object to the ArrayList.
+*/
 // method for Showing all the transaction to display on the console
 public static void showTransaction(){
 //put all the transaction in the allTransaction container when this method is called
@@ -289,6 +319,11 @@ public static void showTransaction(){
      //display all transaction with its Date,Time,Description,Vendor, & amount.
        System.out.println(t);// because we are calling the toString method.getDate()+ " | " + t.getTime()+ " | " + t.getDescription() + " | " + t.getVendor()+ " | " + t.getAmount());
         }
+     /* We call the getTransaction method that read the input data saved from csv file and add it to our ArrayList.
+     * Display message will show & title
+     * We sort it in descending order to get the latest first before the print/display.
+     * Loop through the arrayList to get all element in the list
+     * Display it on our console */
 }
 // ============================ End All Entries(A) ============================== //
 
@@ -296,6 +331,8 @@ public static void showTransaction(){
 public static void readDeposit(){
 //call this method for reading from the files
 getTransaction();
+//Display message
+System.out.println("--------Your Deposit Information-------");
 //Got this sort method from the showTransaction method copy & pasta hehe but I should create method to DRY.
 allTransaction.sort((t1,t2)-> {
     int dateCompare = t2.getDate().compareTo(t1.getDate());
@@ -303,21 +340,31 @@ allTransaction.sort((t1,t2)-> {
         return dateCompare;
     }
     return t2.getTime().compareTo(t1.getTime());});//will check using the time if 2 dates are equal.
+for(Transaction t : allTransaction) {
+    if (t.getAmount()>0){
+        System.out.println(t.toString());
+}
+//for(int i=0; i<allTransaction.size(); i++){
+//    // Get each transaction one at a time
+//    Transaction t = allTransaction.get(i);
+//    if(t.getAmount() > 0){
+//        System.out.println(t);
 
-for(int i=0; i<allTransaction.size(); i++){
-    // Get each transaction one at a time
-    Transaction t = allTransaction.get(i);
-    if(t.getAmount() > 0){
-        System.out.println(t);
-    }
 }
 }
+/* We call the getTransaction method that read the input data saved from csv file and add it to our ArrayList.
+ * Display message will show
+ * We sort it in descending order to get the latest first before the print/display.
+ * Loop through the arrayList to get every element/deposit in the list.
+ * Display it on our console */
 // ============================ End  Deposit Only ============================== //
 
 // ============================ LEDGER Payment Only(P) ============================== //
 public static void readPayment(){
 //call this method for reading from the files
 getTransaction();
+//Display message
+System.out.println("--------Your Payment Information-------");
 //Got this sort method from the showTransaction method copy & pasta hehe,but I should create method to DRY.
 allTransaction.sort((t1,t2)-> {
     int dateCompare = t2.getDate().compareTo(t1.getDate());
@@ -334,7 +381,93 @@ for(int i=0; i<allTransaction.size(); i++){
     }
 }
 }
+    /* We call the getTransaction method that read the input data saved from csv file and add it to our ArrayList.
+     * Display message will show
+     * We sort it in descending order to get the latest first before the print/display.
+     * Loop through the arrayList to get every element/Payment in the list.
+     * Display it on our console */
 // ============================ End Payment Only ============================== //
+
+//#################################Report Screen############################### //
+public static void reportScreen(){
+
+    System.out.println("-----------------------------------");
+    System.out.println("Welcome to The Report Screen !!!");
+    System.out.println("-----------------------------------");
+
+    System.out.print("What would you like to do?  Select 1-5 & 0 (back).\n");
+    System.out.print("1)Month To Date  \n");
+    System.out.print("2) Previous Month\n");
+    System.out.print("3)Year To Date \n");
+    System.out.print("4)Previous Year\n");
+    System.out.print("5)Search by Vendor \n");
+    System.out.print("0)Back \n");//Ledger Screen
+      String choice = myScanner.nextLine();
+    switch (choice) {
+        // If user chose "1"
+        case "1":
+            //Call method to read and display all transactions (deposits and payments)
+
+            showTransaction();
+            break;
+        // If user chose "2"
+        case "2":// Call method to read and display only deposit (positive amount) transactions
+            readDeposit();
+            break;
+        // If user chose "3"
+        case "3":
+            // Call method to read and display only payment (negative amount) transactions
+            readPayment();
+            break;
+        // If user chose "4" or "r"
+        case "4":
+            // Call method to display the Reports menu screen
+            reportScreen();
+            break;
+        // If user chose "5" or "h"
+        case "5":
+            // Return to the Home screen
+            homeScreen();
+            break;
+        case "0":
+            // Return to the Home screen
+            homeScreen();
+            break;
+        // If user entered any invalid option
+        default:
+            System.out.println("Invalid option. Try again.");
+            break;
+    }
+}
+//1=> Month to date the start of the current month to today/now
+public static void monthDateReport(){
+  //get the current month
+  //loop through /iterate list of transaction
+  //for each transaction comparing the month of the date of the transaction  to the current month
+  //print if there is the match and skip if therenot a match
+}
+
+
+
+
+//#################################Report Screen############################### //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 //log file to check for the search filter later

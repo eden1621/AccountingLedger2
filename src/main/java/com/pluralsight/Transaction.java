@@ -42,6 +42,8 @@ public class Transaction {
     }
 @Override //got this method from my peers
     public String toString() {
-        return String.format("Date "+ date.toString()+ " | " + "Time "  + time.toString()+" | "+ "Description " + description+ " | "+ "vendor "+ vendor+ " | "+"amount " + amount );
+        String type = (amount< 0 ) ? "Payment" : "Deposit";
+        return String.format("Date "+ date.toString()+ " | " + "Time "  + time.toString()+" | "+ "Description " + description+ " | "+ "vendor "+ vendor+ " | "+"amount " + amount + type );
+
     }
 }
