@@ -337,28 +337,6 @@ for(int i=0; i<allTransaction.size(); i++){
 // ============================ End Payment Only ============================== //
 
 }
-
-
-
-/* =creating arrayList container that hold all the transaction that is written
-transaction.csv => main /we import arraylist => ArrayList<Transaction> allTransaction = getTransaction(); and
- display System.out.println("This is all the transaction" => this method  will be invoked/called getTransaction()
-
-  //put all the transaction in the allTransaction container
- ArrayList<Transaction> allTransaction = getTransaction();
- //Display message
-  System.out.println("This is all the transaction";
-  //loop through it to  display and show :-
-  // for (int i = 0; i < allTransaction.size(); i++) {
-  //            Transaction t = allTransaction.get(i);
-  //            //display all transaction with its Date,Time,Description,Vendor, & amount.
-  //            System.out.printf("id: %d %s - Price: $%.2f%n",//this need to keep the format when displaying
-  //                    t.getDate(), t.getTime(), t.getDescription(),t.getVendor(), t.getAmount());
-  //        }
-
- */
-
-
 //log file to check for the search filter later
         /*static DateTimeFormatter myTimeStampFormatter = DateTimeFormatter.ofPattern("yyyy-MM - dd  HH:mm:ss");
 
