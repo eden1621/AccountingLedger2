@@ -19,10 +19,12 @@ public class Transaction {
         this.vendor = vendor;
         this.amount = amount;
     }
-//Method if we need
-
-
-
+//Custom Method to covert to string.
+@Override //got this method from my peers
+public String toString() {
+    String type = (amount< 0 ) ? "Payment" : "Deposit";//this condition declare the type after evaluating the amount against the condition.
+    return String.format("%s | %s | %s | %s | %.2f, %s", date.toString(), time.toString(), description, vendor, amount, type);
+}
 //getter and setter for accessing the attributes
 
     public LocalDate getDate() {
@@ -40,10 +42,5 @@ public class Transaction {
     public double getAmount() {
         return this.amount;
     }
-@Override //got this method from my peers
-    public String toString() {
-        String type = (amount< 0 ) ? "Payment" : "Deposit";
-        return String.format("Date "+ date.toString()+ " | " + "Time "  + time.toString()+" | "+ "Description " + description+ " | "+ "vendor "+ vendor+ " | "+"amount " + amount + type );
 
-    }
 }
