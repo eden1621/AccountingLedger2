@@ -18,9 +18,9 @@ Date | Time | Description | Vendor | Amount
 
 2025-05-01 | 11:56:11 | test4 | test4 | 100000.0
 
-2025-05-01 | 12:09:46.835043600 | test5 | test5 | 70000.0
+2025-05-01 | 12:09:46 | test5 | test5 | 70000.0
 
-2025-05-01 | 12:12:11.269691200 | test6 | test6 | 41.0
+2025-05-01 | 12:12:11 | test6 | test6 | 41.0
 
 2025-05-01 | 12:25:20 | Java | JDK | 10000.0
 
@@ -32,3 +32,6 @@ Date | Time | Description | Vendor | Amount
 
 2025-05-01 | 13:47:27 | Bilenie Tilahun | Try again | 8014.0
 2025-05-01 | 13:47:51 | Bilenie Tilahun | Try Again | -1247.0
+
+2025-05-01 | 15:47:53 | Class test | Class test | 869.0
+2025-05-01 | 15:48:32 | Class test | Class test | -5595.0
