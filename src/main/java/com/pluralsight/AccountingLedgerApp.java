@@ -438,8 +438,7 @@ public class AccountingLedgerApp {
                     searchVendor();
                     break;
                 case "0":
-                    // Return to the Home screen
-                    homeScreen();
+                    ledgerScreen();
                     break;
                 // If user entered any invalid option
                 default:
