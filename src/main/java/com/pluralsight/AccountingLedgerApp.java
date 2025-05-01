@@ -24,7 +24,7 @@ static int currentMonth = today.getMonthValue();
 public static void main(String[] args) {
         //Display the menu page
         homeScreen();
-    }
+}
 
 //**************************** HomeScreen Display Method **********************************************//
 public static void homeScreen() {
@@ -43,6 +43,7 @@ public static void homeScreen() {
 
             //take the option choice from the menu store it in variable called userChoice.
             String actualChoice = myScanner.nextLine();
+
             //If user chooses (D)
             if (actualChoice.equalsIgnoreCase("D")) {
                 //ask the deposit information by invoking the addDeposit function.
@@ -50,8 +51,7 @@ public static void homeScreen() {
                 //If user choose (P)
             } else if (actualChoice.equalsIgnoreCase("P")) {
                 addPayment();
-            }
-            //If user choose (L) show Ledger
+            } //If user choose (L) show Ledger
             else if (actualChoice.equalsIgnoreCase("L")) {
                 //=========================== Ledger Screen =====================
                 //Calling this method display the Ledger menu options
@@ -60,7 +60,8 @@ public static void homeScreen() {
             //If user choose (X) exit the application
             else if (actualChoice.equalsIgnoreCase("X")) {
                 System.out.println("Goodbye!");
-                input = false;  // Properly exit the program// we can turn the boolean to false
+                return;
+//               input = false;  // Properly exit the program// we can turn the boolean to false
             } else {
                 System.out.println("Invalid option. Try again.");
             }
@@ -106,14 +107,15 @@ public static void addDeposit() {
         // Write the collected information to a file in a format required
         // Instantiate an object from our class transaction
         Transaction collectDepositInfo = new Transaction(date,time,description, vendor, Double.parseDouble(amount));
+        String displayDeposit= collectDepositInfo.getDate().format(formatterDate) + " | " + collectDepositInfo.getTime().format(formatterTime) + " | " + collectDepositInfo.getDescription() + " | " + collectDepositInfo.getVendor() + " | " + collectDepositInfo.getAmount();
 
         //write the deposit information to the transaction.csv in this format.
-        writer.write(collectDepositInfo.getDate().format(formatterDate) + " | " + collectDepositInfo.getTime().format(formatterTime) + " | " + collectDepositInfo.getDescription() + " | " + collectDepositInfo.getVendor() + " | " + collectDepositInfo.getAmount());
+        writer.write(displayDeposit);
         writer.newLine();//write on new line=> format when it's written in the file.
         writer.close();//closing the buffer the writer.
         //Display this message if done correctly
         System.out.println("\nDeposit Added to the file Successfully!");
-        System.out.println(collectDepositInfo);
+        System.out.println(displayDeposit);
 
     } catch (Exception e) {
         System.out.println("Error while adding deposit: " + e.getMessage());
@@ -148,21 +150,21 @@ public static void addPayment() {
         // The date and time stamp will be added to the file automatically
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now(); // remove nanoseconds for cleaner output=>can also pass the formatter (time.format(formatter1)/date.format(formatter2)
-        date.format(formatterDate);
-        time.format(formatterTime);
 
         // Write the collected information to a file in a format required
         // Instantiate an object from our class transaction
         double amountDouble = Double.parseDouble(amount);
         amountDouble = -1 * Math.abs(amountDouble);
         Transaction collectDebitInfo = new Transaction(date, time, description, vendor, amountDouble);
+        String displayPaymentInfo = collectDebitInfo.getDate().format(formatterDate) + " | " + collectDebitInfo.getTime().format(formatterTime) + " | " + collectDebitInfo.getDescription() + " | " + collectDebitInfo.getVendor() + " | " + collectDebitInfo.getAmount();
 
         //write the payment information to the transaction.csv in this format.
-        writer.write(collectDebitInfo.getDate() + " | " + collectDebitInfo.getTime() + " | " + collectDebitInfo.getDescription() + " | " + collectDebitInfo.getVendor() + " | " + collectDebitInfo.getAmount());
+        writer.write(displayPaymentInfo);
         writer.newLine();//write on new line=> format when it's written in the file.
         writer.close();//closing the buffer the writer.
         //Display this message if done correctly
         System.out.println("\nPayment Added to the file Successfully!");
+        System.out.println(displayPaymentInfo);
     } catch (Exception e) {
         System.out.println("Error while adding payment: " + e.getMessage());
     }
@@ -198,7 +200,6 @@ public static String validation(String ask) {
 * Based on the input evaluate the condition and return the answer.*/
 }
 //***************************** End of validation ************************************************//
-
 
 // ============================ LEDGER SCREEN ============================== //
 public static void ledgerScreen() {
