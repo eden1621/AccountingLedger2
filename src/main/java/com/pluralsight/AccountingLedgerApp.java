@@ -60,8 +60,7 @@ public static void homeScreen() {
             //If user choose (X) exit the application
             else if (actualChoice.equalsIgnoreCase("X")) {
                 System.out.println("Goodbye!");
-                return;
-//               input = false;  // Properly exit the program// we can turn the boolean to false
+               System.exit(0);;  // Properly exit the program// we can turn the boolean to false
             } else {
                 System.out.println("Invalid option. Try again.");
             }
@@ -256,8 +255,10 @@ public static void ledgerScreen() {
 // ============================ End LEDGER SCREEN ============================== //
 
 // ============================ LEDGER All Entries(A) ============================== //
+
 public static ArrayList<Transaction> getTransaction() {
 //Method that Return ArrayList that have all the transaction when called.
+    allTransaction.clear();
 try {
 //Read from the csv file with a booster buffer.
 BufferedReader transactionRead = new BufferedReader(new FileReader("src/main/resources/transaction.csv"));//reading the file
