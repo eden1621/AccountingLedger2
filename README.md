@@ -56,10 +56,10 @@ Home Screen:
 ![Watch demo video](src/main/resources/videos/home_screen-ezgif.com-video-to-gif-converter.gif)
 
 Ledger Screen:
-![Watch demo video](src/main/resources/videos/ledger_screen.mp4)
+![Watch demo video](src/main/resources/videos/ledger_screen-ezgif.com-video-to-gif-converter.gif)
 
 Reports Screen:
-![Watch demo video](src/main/resources/videos/remote_screen.mp4)
+![Watch demo video](src/main/resources/videos/remote-screen-ezgif.com-video-to-gif-converter.gif)
 
 (You can replace the paths above with your actual screenshot file paths or URLs when ready.)
 
