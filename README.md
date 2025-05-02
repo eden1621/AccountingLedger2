@@ -73,7 +73,8 @@ Copy
 Edit
  
 //Usage of the Method validation
-`String description = validation("Enter the Description: \n");
+```
+String description = validation("Enter the Description: \n");
 String vendor = validation("Enter the Vendor: \n");
 String amount = validation("Enter the Amount: \n");/
 
@@ -95,7 +96,9 @@ return answer;
  answer to the questions start with nothing
 ask question to the user
 take the input from the users about the deposit information store it a variable.
- it will return me the answer to the question after validating . make thing easier */`
+ it will return me the answer to the question after validating . make thing easier */
+ 
+ ```
 
 ## License
 N/A
