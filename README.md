@@ -51,15 +51,15 @@ Every transaction will be saved automatically to the transactions.csv file locat
 
 ## Screenshots
 File Structure:
-![screen shot](src/main/resources/images/file_structure.png)
+![screen shot] (src/main/resources/images/file_structure.png)
 Home Screen:
-![Watch demo video](src/main/resources/videos/home_screen.mp4)
+![Watch demo video] (src/main/resources/videos/home_screen.mp4)
 
 Ledger Screen:
-![Watch demo video](src/main/resources/videos/ledger_screen.mp4)
+![Watch demo video] (src/main/resources/videos/ledger_screen.mp4)
 
 Reports Screen:
-![Watch demo video](src/main/resources/videos/remote_screen.mp4)
+![Watch demo video] (src/main/resources/videos/remote_screen.mp4)
 
 (You can replace the paths above with your actual screenshot file paths or URLs when ready.)
 
