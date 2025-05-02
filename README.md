@@ -50,14 +50,16 @@ Choose X to exit the application.
 Every transaction will be saved automatically to the transactions.csv file located in /src/main/resources/.
 
 ## Screenshots
+File Structure:
+![screen shot](src/main/resources/images/file_structure.png)
 Home Screen:
-(Watch demo video ) [src/main/resources/videos/home_screen.mp4]
+![Watch demo video](src/main/resources/videos/home_screen.mp4)
 
 Ledger Screen:
-(Watch demo video ) [src/main/resources/videos/ledger_screen.mp4]
+![Watch demo video](src/main/resources/videos/ledger_screen.mp4)
 
 Reports Screen:
-(Watch demo video ) [src/main/resources/videos/remote_screen.mp4 ]
+![Watch demo video](src/main/resources/videos/remote_screen.mp4)
 
 (You can replace the paths above with your actual screenshot file paths or URLs when ready.)
 
@@ -70,10 +72,31 @@ One interesting part of my project was how I created a Transaction object to cap
 java
 Copy
 Edit
-`Transaction transaction = new Transaction(date, time, description, vendor, amount);
-transactionList.add(transaction);
-ledgerService.saveTransaction(transaction);`
-This made it easier to organize the transaction data and made the application more readable and maintainable.
+ 
+`//Usage of the Method validation
+String description = validation("Enter the Description: \n");
+String vendor = validation("Enter the Vendor: \n");
+String amount = validation("Enter the Amount: \n");/
+
+public static String validation(String ask) {
+String answer = "";
+while (true) {
+System.out.print(ask);
+answer = myScanner.nextLine().trim(); 
+if (answer.isEmpty()) {
+//if the users pass empty input this will be display and continue asking the question.
+System.out.println("Input cannot be empty. Please enter a valid response.");
+} else {
+break;
+}
+}
+return answer;
+/* method to validate if input to the questions is not valid for every question on the addDeposit method.
+ return type string and parameter is the question I am asking at the addDeposit method.
+ answer to the questions start with nothing
+ask question to the user
+take the input from the users about the deposit information store it a variable.
+ it will return me the answer to the question after validating . make thing easier */`
 
 ## License
 N/A
