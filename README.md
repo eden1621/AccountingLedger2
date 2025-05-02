@@ -67,7 +67,7 @@ Reports Screen:
 Thanks to my instructor, tutor center support, my peers, lots of Googling, and AI assistance for helping me complete this project. Their support helped me figure out how to approach building the screens, handle file operations, and debug issues along the way.
 
 ## Interesting Piece of Code
-One interesting part of my project was how I created a Transaction object to capture user input and save it properly.
+One interesting part of my code was using validation as a method and passing the actual questions as an argument. It asks and also validates the answer.
 
 java
 Copy
@@ -84,7 +84,7 @@ while (true) {
 System.out.print(ask);
 answer = myScanner.nextLine().trim(); 
 if (answer.isEmpty()) {
-//if the users pass empty input this will be display and continue asking the question.
+//if the users pass empty input, this will be displayed and continue asking the question.
 System.out.println("Input cannot be empty. Please enter a valid response.");
 } else {
 break;
