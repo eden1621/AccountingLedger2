@@ -52,6 +52,7 @@ Every transaction will be saved automatically to the transactions.csv file locat
 ## Screenshots
 File Structure:
 ![screen shot](src/main/resources/images/file_structure.png)
+
 Home Screen:
 ![Watch demo video](src/main/resources/videos/home_screen-ezgif.com-video-to-gif-converter.gif)
 
