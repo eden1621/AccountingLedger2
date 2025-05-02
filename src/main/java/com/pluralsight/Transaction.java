@@ -23,7 +23,7 @@ public Transaction(LocalDate date, LocalTime time, String description, String ve
 @Override //got this method from my peers
 public String toString() {
     String type = (amount< 0 ) ? "Payment" : "Deposit";//this condition declare the type after evaluating the amount against the condition.
-    return String.format("%s | %s | %s | %s | %.2f, %s", date.toString(), time.toString(), description, vendor, amount, type);
+    return String.format("%-12s | %-12s | %-18s | %-18s | %18.2f, %s", date.toString(), time.toString(), description, vendor, amount, type);
 }
 //getter and setter for accessing the attributes
 

@@ -148,7 +148,7 @@ public static void readDeposit() {
 //call this method for reading from the files
     getTransaction();
 //Display message
-    System.out.println("--------Your Deposit Information-------");
+    System.out.println("--------Your Deposit Information-------\n\n");
     for (Transaction t : allTransaction) {
         if (t.getAmount() > 0) {
             System.out.println(t);
@@ -167,7 +167,7 @@ public static void readPayment() {
 //call this method for reading from the files
     getTransaction();
 //Display message
-    System.out.println("--------Your Payment Information-------");
+    System.out.println("--------Your Payment Information-------\n\n");
 
     for (Transaction t : allTransaction) {
         if (t.getAmount() < 0) {
