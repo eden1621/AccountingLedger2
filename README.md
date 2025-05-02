@@ -51,6 +51,7 @@ Every transaction will be saved automatically to the transactions.csv file locat
 
 ## Screenshots
 File Structure:
+
 ![screen shot](src/main/resources/images/file_structure.png)
 
 Home Screen:
