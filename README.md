@@ -51,15 +51,15 @@ Every transaction will be saved automatically to the transactions.csv file locat
 
 ## Screenshots
 File Structure:
-![screen shot] (src/main/resources/images/file_structure.png)
+![screen shot](src/main/resources/images/file_structure.png)
 Home Screen:
-![Watch demo video] (src/main/resources/videos/home_screen.mp4)
+![Watch demo video](src/main/resources/videos/home_screen-ezgif.com-video-to-gif-converter.gif)
 
 Ledger Screen:
-![Watch demo video] (src/main/resources/videos/ledger_screen.mp4)
+![Watch demo video](src/main/resources/videos/ledger_screen.mp4)
 
 Reports Screen:
-![Watch demo video] (src/main/resources/videos/remote_screen.mp4)
+![Watch demo video](src/main/resources/videos/remote_screen.mp4)
 
 (You can replace the paths above with your actual screenshot file paths or URLs when ready.)
 
@@ -73,8 +73,8 @@ java
 Copy
 Edit
  
-`//Usage of the Method validation
-String description = validation("Enter the Description: \n");
+//Usage of the Method validation
+`String description = validation("Enter the Description: \n");
 String vendor = validation("Enter the Vendor: \n");
 String amount = validation("Enter the Amount: \n");/
 
@@ -96,7 +96,7 @@ return answer;
  answer to the questions start with nothing
 ask question to the user
 take the input from the users about the deposit information store it a variable.
- it will return me the answer to the question after validating . make thing easier */`
+ it will return me the answer to the question after validating . make thing easier */
 
 ## License
 N/A
