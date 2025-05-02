@@ -70,9 +70,9 @@ One interesting part of my project was how I created a Transaction object to cap
 java
 Copy
 Edit
-Transaction transaction = new Transaction(date, time, description, vendor, amount);
+`Transaction transaction = new Transaction(date, time, description, vendor, amount);
 transactionList.add(transaction);
-ledgerService.saveTransaction(transaction);
+ledgerService.saveTransaction(transaction);`
 This made it easier to organize the transaction data and made the application more readable and maintainable.
 
 ## License

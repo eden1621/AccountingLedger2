@@ -4,7 +4,6 @@ import static com.pluralsight.AccountingLedgerApp.*;
 public class CustomSearch {
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Custom Search @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@//
 
-
     public static void searchDescription() {
         Ledger.getTransaction();
         System.out.println("Enter Description : ");

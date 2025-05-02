@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class AccountingLedgerApp {
 
-//declare the scanner and datetime formatter as a static to be able to use it throughout the class.
+//declare the scanner,datetime formatter, ArrayList as a static to be able to use it throughout the class.
 static Scanner myScanner = new Scanner(System.in);
 static DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 static DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -18,7 +18,7 @@ static int currentMonth = today.getMonthValue();
 
 //Static LocalDateTime dateTimeConvert = LocalDateTime.parse( "date time", formatter);
 public static void main(String[] args) {
-        //Display the menu page
+        //Display the menu page and everything linked to it.
         Home.homeScreen();
 }
 
