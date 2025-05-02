@@ -31,16 +31,16 @@ public static void ledgerScreen() {
             // If user chose "A"
             case "A":
                 //Call method to read and display all transactions (deposits and payments)
-                showTransaction();
+                Ledger.showTransaction();
                 break;
             // If user chose "D"
             case "D":// Call method to read and display only deposit (positive amount) transactions
-                readDeposit();
+                Ledger.readDeposit();
                 break;
             // If user chose "P"
             case "P":
                 // Call method to read and display only payment (negative amount) transactions
-                readPayment();
+                Ledger.readPayment();
                 break;
             // If user chose "R" or "r"
             case "R":
@@ -126,14 +126,14 @@ public static void showTransaction() {
 //Method for Showing all the transaction to display on the console
 
     getTransaction();// Capture the returned Arraylist.
-
+    System.out.println("-----------------------------------");
     System.out.println("This is all the transactions");//Display message
+    System.out.println("-----------------------------------");
 
 //loop through it to  display and show :-
-    for (int i = 0; i < allTransaction.size(); i++) {
-        Transaction t = allTransaction.get(i);
+    for (Transaction t : allTransaction) {
 //display all transaction with its Date,Time,Description,Vendor, & amount.
-        System.out.println(t.toString());
+        System.out.println(t);
     }
     /* We call the getTransaction method that read the input data saved from csv file and add it to our ArrayList.
      * Display message will show.
@@ -151,7 +151,7 @@ public static void readDeposit() {
     System.out.println("--------Your Deposit Information-------");
     for (Transaction t : allTransaction) {
         if (t.getAmount() > 0) {
-            System.out.println(t.toString());
+            System.out.println(t);
         }
         /* We call the getTransaction method that read the input data saved from csv file and add it to our ArrayList.
          * Display message will show
@@ -168,11 +168,12 @@ public static void readPayment() {
     getTransaction();
 //Display message
     System.out.println("--------Your Payment Information-------");
-    for (int i = 0; i < allTransaction.size(); i++) {
-        // Get each transaction one at a time
-        Transaction t = allTransaction.get(i);
+
+    for (Transaction t : allTransaction) {
         if (t.getAmount() < 0) {
             System.out.println(t);
+        }
+
             /* We call the getTransaction method that read the input data saved from csv file and add it to our ArrayList.
              * Display message will show
              * We sort it in descending order to get the latest first before the print/display.
@@ -183,4 +184,3 @@ public static void readPayment() {
 }
 //============================ End Payment Only ==============================//
 
-}

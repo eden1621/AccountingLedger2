@@ -16,6 +16,7 @@ public static void homeScreen() {
         // Method to display the menu options
         System.out.println("-----------------------------------");
         System.out.println("Welcome to Accounting Ledger App!!!");
+        System.out.println("----------- Home Screen -----------");
         System.out.println("-----------------------------------");
 
         System.out.print("What would you like to do?  Select D,P, L or X.\n");
@@ -182,6 +183,5 @@ public static String validation(String ask) {
      * Based on the input evaluate the condition and return the answer.*/
 }
 //***************************** End of validation ************************************************//
-
 
 }

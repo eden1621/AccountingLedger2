@@ -51,13 +51,13 @@ Every transaction will be saved automatically to the transactions.csv file locat
 
 ## Screenshots
 Home Screen:
-!( ) [ ]
+(Watch demo video ) [src/main/resources/videos/home_screen.mp4]
 
 Ledger Screen:
-!( ) [ ]
+(Watch demo video ) [src/main/resources/videos/ledger_screen.mp4]
 
 Reports Screen:
-!( ) [ ]
+(Watch demo video ) [src/main/resources/videos/remote_screen.mp4 ]
 
 (You can replace the paths above with your actual screenshot file paths or URLs when ready.)
 
