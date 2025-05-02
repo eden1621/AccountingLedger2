@@ -95,7 +95,7 @@ return answer;
  answer to the questions start with nothing
 ask question to the user
 take the input from the users about the deposit information store it a variable.
- it will return me the answer to the question after validating . make thing easier */
+ it will return me the answer to the question after validating . make thing easier */`
 
 ## License
 N/A
