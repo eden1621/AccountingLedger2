@@ -55,12 +55,15 @@ File Structure:
 ![screen shot](src/main/resources/images/file_structure.png)
 
 Home Screen:
+
 ![Watch demo video](src/main/resources/videos/home_screen-ezgif.com-video-to-gif-converter.gif)
 
 Ledger Screen:
+
 ![Watch demo video](src/main/resources/videos/ledger_screen-ezgif.com-video-to-gif-converter.gif)
 
 Reports Screen:
+
 ![Watch demo video](src/main/resources/videos/remote-screen-ezgif.com-video-to-gif-converter.gif)
 
 
