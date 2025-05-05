@@ -43,7 +43,7 @@ public static void customScreen() {
         //if user input last date , get the date from all the transaction before the lastDate including itself.
         //if user input beginning date, get the date from all the transaction everything after the beginning date including itself.
         //No input skip it.
-        //Date should be in the transaction if not print "no transaction found with this date".
+        //Date should be in the transaction and match it, if not print "no transaction found with this date".
 
         LocalDate tDate = t.getDate();
 
