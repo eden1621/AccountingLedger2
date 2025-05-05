@@ -2,52 +2,86 @@ package com.pluralsight;
 
 import java.time.LocalDate;
 
+import static com.pluralsight.AccountingLedgerApp.allTransaction;
+import static com.pluralsight.AccountingLedgerApp.myScanner;
+
 public class CustomSearch {
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Custom Search @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@//
 public static void customScreen() {
+    //Display message
     System.out.println("-----------------------------------");
     System.out.println("----------- Custom Search ---------");
     System.out.println("-----------------------------------");
 
-    String startDate = Home.validation("Enter the Start Date (MM/dd/yyyy): \n");
-    String endDate = Home.validation("Enter the End Date (MM/dd/yyyy): \n");
-    String description = Home.validation("Enter the Description: \n");
-    String vendor = Home.validation("Enter the Vendor: \n");
-    String amount = Home.validation("Enter the Amount: \n");
+    //prompt the user to input search type
+    System.out.println("Enter the Start Date (MM/dd/yyyy): \n");
+    String startDate = myScanner.nextLine().trim();
+    System.out.println("Enter the End Date (MM/dd/yyyy): \n");
+    String endDate = myScanner.nextLine().trim();
+    System.out.println("Enter the Description: \n");
+    String description= myScanner.nextLine().trim();
+    System.out.println("Enter the Vendor: \n");
+    String vendor = myScanner.nextLine().trim();
+    System.out.println("Enter the Amount: \n");
+    String amount = myScanner.nextLine().trim();
 
-    LocalDate beginningDate = LocalDate.parse(startDate);
-    LocalDate lastDate = LocalDate.parse(endDate);
-    double actualAmount = Double.parseDouble(amount);
+    //convert input to the appropriate data type if not empty.
+    LocalDate beginningDate = startDate.isEmpty() ? null : LocalDate.parse(startDate);
+    LocalDate lastDate = endDate.isEmpty() ? null : LocalDate.parse(endDate);
+    Double actualAmount = amount.isEmpty() ? null : Double.parseDouble(amount);
+
+
+    //Based on the input do the logic
+    boolean found = false;
 
     for (Transaction t : AccountingLedgerApp.allTransaction) {
+
         boolean matches = true;
 
-        if (startDate != null && t.getDate().isBefore(beginningDate)) {
+        // ================= Date Matching ====================
+        LocalDate tDate = t.getDate();
+
+        if (beginningDate != null && lastDate != null) {
+            if (tDate.isBefore(beginningDate) || tDate.isAfter(lastDate)) {
+                matches = false;
+            }
+        } else if (beginningDate != null) {
+            if (tDate.isBefore(beginningDate)) {
+                matches = false;
+            }
+        } else if (lastDate != null) {
+            if (tDate.isAfter(lastDate)) {
+                matches = false;
+            }
+        }
+
+        // ================ Description Matching ================
+        if (!description.isBlank() && !t.getDescription().toLowerCase().contains(description.toLowerCase())) {
             matches = false;
         }
 
-        if (endDate != null && t.getDate().isAfter(lastDate)) {
-            matches = false;
-        }
-
-        if (!description.isBlank() && !t.getDescription().toLowerCase().contains(description)) {
-            matches = false;
-        }
-
+        // ================ Vendor Matching =====================
         if (!vendor.isBlank() && !t.getVendor().toLowerCase().contains(vendor)) {
             matches = false;
         }
-        if (amount != null && t.getAmount() != actualAmount) {
+
+        // ================ Amount Matching =====================
+        if (actualAmount != null && t.getAmount() != actualAmount) {
             matches = false;
         }
 
         if (matches) {
             System.out.println(t);
+            found = true;
         }
+    }
 
-//Work In Progress ....
+    if (!found) {
+        System.out.println("No transactions matched your custom search.");
     }
 }
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Custom Search @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@//
 }
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Custom Search @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@//
+
