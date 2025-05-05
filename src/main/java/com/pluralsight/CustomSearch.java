@@ -40,6 +40,11 @@ public static void customScreen() {
         boolean matches = true;
 
         // ================= Date Matching ====================
+        //if user input last date , get the date from all the transaction before the lastDate including itself.
+        //if user input beginning date, get the date from all the transaction everything after the beginning date including itself.
+        //No input skip it.
+        //Date should be in the transaction if not print "no transaction found with this date".
+
         LocalDate tDate = t.getDate();
 
         if (beginningDate != null && lastDate != null) {
@@ -57,17 +62,27 @@ public static void customScreen() {
         }
 
         // ================ Description Matching ================
+
         if (!description.isBlank() && !t.getDescription().toLowerCase().contains(description.toLowerCase())) {
+            //if user input description we get all the transaction matching the description input.
+            //if the description input not in the transaction display no transaction found.
+            //if user left it empty skip it.
             matches = false;
         }
 
         // ================ Vendor Matching =====================
         if (!vendor.isBlank() && !t.getVendor().toLowerCase().contains(vendor)) {
+            //if user input vendor we will get all the transaction matching the vendor input.
+            //if the vendor input not in the transaction display no transaction found.
+            //if user left it empty skip it.
             matches = false;
         }
 
         // ================ Amount Matching =====================
         if (actualAmount != null && t.getAmount() != actualAmount) {
+            //if user input amount get all the transaction matching the amount input.
+            //if the amount input not in the transaction display no transaction found.
+            //if user left it empty skip it.
             matches = false;
         }
 
