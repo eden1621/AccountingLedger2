@@ -9,14 +9,32 @@ import static com.pluralsight.AccountingLedgerApp.*;
 
 public class Home {
 
-//**************************** HomeScreen Display Method **********************************************//
-public static void homeScreen() {
-    boolean input = true;
-    while (input) {
+// ========================= HOME SCREEN ===========================
+    public static void homeScreen() {
+        while (true) {
+
+            // 🔑 LOGIN FIRST BEFORE ALLOWING ACCESS
+            if (!login()) {
+                System.out.println("Login failed. Try again? (Y/N): ");
+                String tryAgain = myScanner.nextLine();
+                if (!tryAgain.equalsIgnoreCase("Y")) {
+                    System.out.println("Exiting...");
+                    return; // exit app
+                }
+                // if "Y", loop again and show login prompt again
+            } else {
+                break; // login successful, exit login loop
+            }
+        }
+
+        // After successful login, show menu as normal
+        boolean input = true;
+        while (input) {
+
         // Method to display the menu options
         System.out.println("-----------------------------------");
         System.out.println("Welcome to Accounting Ledger App!!!");
-        System.out.println("----------- Home Screen -----------");
+        System.out.print("----------- Home Screen -----------");
         System.out.println("-----------------------------------");
 
         System.out.print("What would you like to do?  Select D,P, L or X.\n");
@@ -51,7 +69,7 @@ public static void homeScreen() {
         /* Display welcome message and options on the screen/console*/
     }
 }
-//***************************** End *********************************************************//
+//***************************** End Home Screen *********************************************************//
 
 //******************************* Add Deposit Method ******************************************************//
 public static void addDeposit() {
@@ -184,4 +202,28 @@ public static String validation(String ask) {
 }
 //***************************** End of validation ************************************************//
 
+    // ========================= LOGIN ===========================
+    private static boolean login() {
+        int attempts = 3;
+        while (attempts > 0) {
+            System.out.print("Username: ");
+            String username = myScanner.nextLine();
+            System.out.print("Password:  ");
+            String password = myScanner.nextLine();
+
+            // Hardcoded login credentials (You could extend this later)
+            if (username.equals("admin") && password.equals("1234")) {
+                return true; // Login successful
+            } else {
+                attempts--;
+                System.out.println("Invalid login. Attempts left: " + attempts);
+            }
+        }
+        return false; // Too many failed attempts
+    }
+    // ========================= END LOGIN ===========================
+
 }
+
+
+
